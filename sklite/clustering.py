@@ -2,13 +2,6 @@ import numpy as np
 import pandas as pd
 from sklite.utils import NList
 
-# class KMeansEstimator:
-#     def __init__(self, mu_k, distortion, n_iter) -> None:
-#         self.mu_k = mu_k
-#         self.distortion = distortion
-#         self.n_iter = n_iter
-
-
 class KMeans:
     def __init__(self, 
                  n_clusters=8, 
@@ -72,19 +65,10 @@ class KMeans:
             # Get the k index that has the minimum distance value
             min_dist_idx = np.argmin(r, axis=1)
 
-            # Create a Matrix of Zeros like the r_nk matrix
-            binary_r = np.zeros_like(r)   
-
-            # Convert the index with min. distance as one
-            binary_r[np.arange(n_samples), min_dist_idx] = 1
-
-            r = binary_r
-            del binary_r
-
             # STEP3: Given r_nk, optimize the mu_k
             self.distortion = 0
             for k_val in range(self.n_clusters):
-                samples_closest_to_k = r[:, k_val] == 1
+                samples_closest_to_k = min_dist_idx==k_val
                 self.mu_k[k_val] = np.mean(X_train[samples_closest_to_k], axis=0)
                 self.distortion+=np.linalg.norm(X_train[samples_closest_to_k] - self.mu_k[k_val])
             
@@ -119,14 +103,3 @@ class KMeans:
 
         # Return labels 
         return np.argmin(r, axis=1)
-
-    def score(self, ):
-        pass
-
-    def transform(self, ):
-        pass
-
-
-
-
-        
