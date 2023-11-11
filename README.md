@@ -1,6 +1,6 @@
-# MLImplementations
+# ML Implementations
 
-My implementation of the basic version of sci-kit learn ML package with the most popular packages:
+My implementation of the basic version of the sci-kit learn ML package with the most popular packages involving:
 * Regression
 * Classification
 * Clustering
